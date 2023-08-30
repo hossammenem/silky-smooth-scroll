@@ -6,6 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hossammenem/silcky-smooth-scrolling.git"
+  },
+  "author": "hossammenem",
+  "license": "ISC",
+  "homepage": "https://github.com/hossammenem/silcky-smooth-scrolling#readme"
 }
