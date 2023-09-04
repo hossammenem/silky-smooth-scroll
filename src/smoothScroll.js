@@ -1,9 +1,9 @@
 import { normalizeWheelDelta, requestFrame } from "./broswersSupport.js";
 
-var isMouseInsideChild = false;
+let isMouseInsideChild = false;
 export default function smoothScroll(event, state) {
-  let closestScrollParent = getScrollParent(event.target);
-  var { target, pos, moving } = state.getState();
+  var closestScrollParent = getScrollParent(event.target);
+  var { speed, smooth, target, pos, moving, edgeStop } = state.getState();
   var delta = normalizeWheelDelta(event);
 
   if (closestScrollParent != target) {
@@ -11,13 +11,7 @@ export default function smoothScroll(event, state) {
       isMouseInsideChild = true;
     });
 
-    if (
-      !isMouseInsideChild ||
-      (closestScrollParent.scrollTop == 0 && delta > 0) ||
-      (closestScrollParent.scrollTop + closestScrollParent.offsetHeight >=
-        closestScrollParent.scrollHeight &&
-        delta < 0)
-    ) {
+    if (isInsideChild(closestScrollParent, delta)) {
       event.preventDefault();
       isMouseInsideChild = false;
     } else if (isMouseInsideChild) {
@@ -28,24 +22,15 @@ export default function smoothScroll(event, state) {
     event.preventDefault();
   }
 
-  pos += -delta * 70;
-  pos = Math.max(
-    -120,
-    Math.min(pos, target.scrollHeight + 120 - target.clientHeight)
-  );
-  if (pos < 0 && delta < 0) pos += 170;
-  else if (pos > target.scrollHeight - target.clientHeight && delta > 0)
-    pos -= 170;
-
-  state.setState("pos", pos);
+  state.setState("pos", calcPos(pos, speed, delta, edgeStop, target));
 
   if (!moving) frame();
 
   function frame() {
     state.setState("moving", true);
 
-    const { pos } = state.getState();
-    var delta = (pos - target.scrollTop) / 17;
+    const pos = state.getState("pos");
+    var delta = (pos - target.scrollTop) / smooth;
 
     target.scrollTop += Math.round(delta);
 
@@ -55,13 +40,34 @@ export default function smoothScroll(event, state) {
 }
 
 function getScrollParent(node) {
-  if (node == null) {
-    return null;
-  }
+  if (node == null) return null;
 
-  if (node.scrollHeight > node.clientHeight) {
-    return node;
-  } else {
-    return getScrollParent(node.parentNode);
-  }
+  if (node.scrollHeight > node.clientHeight) return node;
+  else return getScrollParent(node.parentNode);
+}
+
+function isInsideChild(closestScrollParent, delta) {
+  return (
+    !isMouseInsideChild ||
+    (closestScrollParent.scrollTop == 0 && delta > 0) ||
+    (closestScrollParent.scrollTop + closestScrollParent.offsetHeight >=
+      closestScrollParent.scrollHeight &&
+      delta < 0)
+  );
+}
+
+function calcPos(pos, speed, delta, edgeStop, target) {
+  pos += -delta * speed;
+  pos = Math.max(
+    -edgeStop,
+    Math.min(pos, target.scrollHeight + edgeStop - target.clientHeight)
+  );
+
+  if (
+    (pos < 0 && delta < 0) ||
+    (pos > target.scrollHeight - target.clientHeight && delta > 0)
+  )
+    pos += -delta * speed;
+
+  return pos;
 }

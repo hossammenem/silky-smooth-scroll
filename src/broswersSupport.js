@@ -1,4 +1,6 @@
 export const requestFrame = (function () {
+  // TODO: I think there is something for rate limiting for screens with higher
+  // fresh rate ( heighr than 60 )
   return (
     window.requestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
@@ -43,8 +45,8 @@ export function addEventListeners(target, state, func) {
     passive: false,
   });
 
-  // those event listeneres are important for  user to be able
-  //to use the scroll bar
+  // those event listeneres are important for the user to be able
+  // to use the scroll bar
 
   // mousedown to prevent the scroll bar from trying to keep on going back to
   // the last pos that we scrolled to ( by the wheel )
