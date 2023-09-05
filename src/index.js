@@ -1,6 +1,6 @@
 /*
-* CREDITS to Manuel Otto for his answer: https://stackoverflow.com/a/47206289
-*/
+ * CREDITS to Manuel Otto for his answer: https://stackoverflow.com/a/47206289
+ */
 
 import { addEventListeners } from "./broswersSupport.js";
 import smoothScroll from "./smoothScroll.js";
