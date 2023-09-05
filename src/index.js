@@ -3,22 +3,20 @@
 
 */
 
-import {
-  addEventListeners,
-  targetBodyNormalization,
-} from "./broswersSupport.js";
+import { addEventListeners } from "./broswersSupport.js";
 import smoothScroll from "./smoothScroll.js";
-import { State } from "./store.js";
+import State from "./store.js";
 
-// TODO: test to see if there are any issues with passing params
-// (conflicts with event and elem)
-export default function scroll(_, elm, options) {
+/**
+ * @param {Element | undefined} elm - The target elemenet that's gonna have the smooth scroll on, `Default: <html>`
+ * @param {import("./store.js").options} options
+ */
+export default function scroll(elm, options) {
   const state = new State();
-  state.initState();
 
-  if (elm == undefined) state.setState("target", targetBodyNormalization());
-  else state.setState("target", elm);
+  if (elm) state.setState("target", elm);
 
+  /** @type {Element} */
   const target = state.getState("target");
 
   state.setState("pos", target.scrollTop);
@@ -28,4 +26,4 @@ export default function scroll(_, elm, options) {
   addEventListeners(target, state, smoothScroll);
 }
 
-document.addEventListener("DOMContentLoaded", scroll);
+document.addEventListener("DOMContentLoaded", () => scroll());

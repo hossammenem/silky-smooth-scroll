@@ -1,8 +1,17 @@
+// @ts-check
 import { normalizeWheelDelta, requestFrame } from "./broswersSupport.js";
 
+/** @type {boolean} */
 let isMouseInsideChild = false;
+
+/**
+ * @param {*} event
+ * @param {*} state
+ * @returns {void | false}
+ */
 export default function smoothScroll(event, state) {
   var closestScrollParent = getScrollParent(event.target);
+  /** @type {import("./store.js").state}*/
   var { speed, smooth, target, pos, moving, edgeStop } = state.getState();
   var delta = normalizeWheelDelta(event);
 
@@ -29,8 +38,10 @@ export default function smoothScroll(event, state) {
   function frame() {
     state.setState("moving", true);
 
+    /** @type {Number} */
     const pos = state.getState("pos");
-    var delta = (pos - target.scrollTop) / smooth;
+    /** @type {Number} */
+    const delta = (pos - target.scrollTop) / smooth;
 
     target.scrollTop += Math.round(delta);
 
@@ -39,6 +50,11 @@ export default function smoothScroll(event, state) {
   }
 }
 
+/**
+ *
+ * @param {*} node
+ * @returns {*}
+ */
 function getScrollParent(node) {
   if (node == null) return null;
 
@@ -46,6 +62,12 @@ function getScrollParent(node) {
   else return getScrollParent(node.parentNode);
 }
 
+/**
+ *
+ * @param {HTMLElement} closestScrollParent
+ * @param {Number} delta
+ * @returns {boolean}
+ */
 function isInsideChild(closestScrollParent, delta) {
   return (
     !isMouseInsideChild ||
@@ -56,6 +78,14 @@ function isInsideChild(closestScrollParent, delta) {
   );
 }
 
+/**
+ * @param {Number} pos
+ * @param {Number} speed
+ * @param {Number} delta
+ * @param {Number} edgeStop
+ * @param {Element} target
+ * @returns {Number} pos
+ */
 function calcPos(pos, speed, delta, edgeStop, target) {
   pos += -delta * speed;
   pos = Math.max(
@@ -63,6 +93,9 @@ function calcPos(pos, speed, delta, edgeStop, target) {
     Math.min(pos, target.scrollHeight + edgeStop - target.clientHeight)
   );
 
+  /* 
+    
+  */
   if (
     (pos < 0 && delta < 0) ||
     (pos > target.scrollHeight - target.clientHeight && delta > 0)

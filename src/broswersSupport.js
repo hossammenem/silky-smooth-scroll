@@ -1,11 +1,15 @@
 export const requestFrame = (function () {
   // TODO: I think there is something for rate limiting for screens with higher
-  // fresh rate ( heighr than 60 )
+  // refresh rate ( heighr than 60 )
   return (
     window.requestAnimationFrame ||
+    // @ts-ignore
     window.webkitRequestAnimationFrame ||
+    // @ts-ignore
     window.mozRequestAnimationFrame ||
+    // @ts-ignore
     window.oRequestAnimationFrame ||
+    // @ts-ignore
     window.msRequestAnimationFrame ||
     function (func) {
       window.setTimeout(func, 1000 / 50);
@@ -21,7 +25,6 @@ export function normalizeWheelDelta(e) {
   } else return e.wheelDelta / 120; // IE,Safari,Chrome
 }
 
-// Rename dis shit
 export function targetBodyNormalization() {
   var target =
     document.scrollingElement ||
@@ -32,6 +35,12 @@ export function targetBodyNormalization() {
   return target;
 }
 
+/**
+ * 
+ * @param {Element} target 
+ * @param {*} state 
+ * @param {Function} func 
+ */
 export function addEventListeners(target, state, func) {
   target.addEventListener("wheel", (e) => func(e, state), {
     passive: false,
