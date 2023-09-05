@@ -25,5 +25,3 @@ export default function scroll(elm, options) {
 
   addEventListeners(target, state, smoothScroll);
 }
-
-document.addEventListener("DOMContentLoaded", () => scroll());
