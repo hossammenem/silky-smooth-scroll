@@ -1,4 +1,3 @@
-// @ts-check
 import { normalizeWheelDelta, requestFrame } from "./broswersSupport.js";
 
 /** @type {boolean} */

@@ -1,7 +1,6 @@
-export const requestFrame = (function () {
-  // TODO: I think there is something for rate limiting for screens with higher
-  // refresh rate ( heighr than 60 )
-  return (
+// TODO: I think there is something for rate limiting for screens with higher
+// refresh rate ( heighr than 60 )
+export const requestFrame = 
     window.requestAnimationFrame ||
     // @ts-ignore
     window.webkitRequestAnimationFrame ||
@@ -14,8 +13,6 @@ export const requestFrame = (function () {
     function (func) {
       window.setTimeout(func, 1000 / 50);
     }
-  );
-})();
 
 export function normalizeWheelDelta(e) {
   if (e.detail) {

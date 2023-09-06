@@ -1,4 +1,3 @@
-// @ts-check
 import { targetBodyNormalization } from "./broswersSupport.js";
 
 /**

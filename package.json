@@ -1,6 +1,6 @@
 {
-  "name": "silcky-smooth-scroll",
-  "version": "1.0.0",
+  "name": "silky-smooth-scroll",
+  "version": "1.0.3",
   "description": "a smooth mouse wheel scroll using vanilla js",
   "main": "./src/index.js",
   "scripts": {
