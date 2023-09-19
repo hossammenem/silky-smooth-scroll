@@ -9,9 +9,11 @@ let isMouseInsideChild = false;
  * @returns {void | false}
  */
 export default function smoothScroll(event, state) {
-  var closestScrollParent = getScrollParent(event.target);
   /** @type {import("./store.js").state}*/
   var { speed, smooth, target, pos, moving, edgeStop } = state.getState();
+
+  var closestScrollParent = getScrollParent(event.target, target);
+
   var delta = normalizeWheelDelta(event);
 
   if (closestScrollParent != target) {
@@ -30,19 +32,27 @@ export default function smoothScroll(event, state) {
     event.preventDefault();
   }
 
-  state.setState("pos", calcPos(pos, speed, delta, edgeStop, target));
+  if (!moving)
+    state.setState(
+      "pos",
+      calcPos(target.scrollTop, speed, delta, edgeStop, target)
+    );
+  else state.setState("pos", calcPos(pos, speed, delta, edgeStop, target));
 
   if (!moving) frame();
 
   function frame() {
     state.setState("moving", true);
 
-    /** @type {Number} */
     const pos = state.getState("pos");
-    /** @type {Number} */
     const delta = (pos - target.scrollTop) / smooth;
 
-    target.scrollTop += Math.round(delta);
+    let isNegativeFLoat = delta < 0 && delta > -1;
+
+    target.scrollBy({
+      top: isNegativeFLoat ? -1 : Math.ceil(delta),
+      behavior: "instant",
+    });
 
     if (target.scrollTop != pos) requestFrame(frame);
     else state.setState("moving", false);
@@ -51,14 +61,23 @@ export default function smoothScroll(event, state) {
 
 /**
  *
- * @param {*} node
+ * @param {} node
+ * @param {HTMLElement} target
  * @returns {*}
  */
-function getScrollParent(node) {
+function getScrollParent(node, target) {
   if (node == null) return null;
 
+  if (
+    node == target ||
+    ((window.getComputedStyle(node).overflowY == "auto" ||
+      window.getComputedStyle(node).overflowY == "scroll") &&
+      node.scrollHeight > node.clientHeight)
+  )
+    return node;
+
   if (node.scrollHeight > node.clientHeight) return node;
-  else return getScrollParent(node.parentNode);
+  else return getScrollParent(node.parentNode, target);
 }
 
 /**

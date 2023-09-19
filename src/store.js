@@ -42,7 +42,7 @@ const MODES = {
  * @typedef {Object} options
  * @prop {Number=} speed - Determines the speed of the scroll.`Default: 100`. If used without `smooth`, default is gonna be used `smooth: 14`.
  * @prop {Number=} smooth - Determines the smoothnes of the scroll, the heigher the slower. `Default: 14`. If used without `speed`, default is gonna be used `speed: 100`.
- * @prop {modesTypes=} mode - Specifies the mode. Mode types are `'snail' | 'normal' | 'turbo'`. It overrides `speed` and the `smooth` values if both or one of them is presented.
+ * @prop {Mode=} mode - Specifies the mode. Mode types are `'snail' | 'normal' | 'turbo'`. It overrides `speed` and the `smooth` values if both or one of them is presented.
  * @prop {boolean=} smoothEdgeStop - Determines whether or not to have a smooth stop at the edges of the screen ( top or bot ) or if you want it to be normal, `Default: false` which is the `normal` behavior.
  */
 
