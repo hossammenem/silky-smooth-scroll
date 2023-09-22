@@ -4,10 +4,11 @@
 
 </div>
 
-<h1 align="center">
-  silky smooth scroll Js
-  <p style="font-size: 16px; margin-top: 20px; font-weight: normal">A very simple library that animates the scroll wheel animation.</p>
-</h1>
+# <p align="center"> silky smooth scroll Js
+
+### <p align="center">A very simple library that animates the scroll wheel animation.</p>
+
+</p>
 
 # Usage
 
@@ -25,10 +26,8 @@ if (typeof window !== "undefined") {
 
 ### Parameters:
 
-&nbsp; `target` <div style="margin-left: 20px;">
-HTML element that's gonna have the smooth scroll applied to. `Default: <html>`.
-
-  </div>
+&nbsp; `target` <br>
+&nbsp; &nbsp; &nbsp; HTML element that's gonna have the smooth scroll applied to. `Default: <html>`.
 
 &nbsp; `options` <div style="margin-left: 20px">
 HTML element that's gonna have the smooth scroll applied to. `Default: <html>`.
@@ -49,10 +48,8 @@ Specifies the mode. Mode types are `'snail' | 'normal' | 'turbo'`. It overrides 
 
 </div>
 
-&nbsp; &nbsp; `smoothEdgeStop` <div style="margin-left: 20px;">
-Determines whether or not to have a smooth stop at the edges of the screen ( top or bot ) or if you want it to be normal, `Default: false` which is the `normal` behavior.
-
-</div>
+&nbsp; &nbsp; `smoothEdgeStop` <br>
+&nbsp; &nbsp; &nbsp; Determines whether or not to have a smooth stop at the edges of the screen ( top or bot ) or if you want it to be normal, `Default: false` which is the `normal` behavior.
 
 # Installation
 
