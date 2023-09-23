@@ -4,11 +4,11 @@
 
 </div>
 
-# <p align="center"> silky smooth scroll Js
+<h1 align="center"> 
+  silky smooth scroll Js
+</h1>
 
-### <p align="center">A very simple library that animates the scroll wheel animation.</p>
-
-</p>
+#### <p align="center">A very simple library that animates the scroll wheel animation.</p>
 
 # Usage
 
@@ -26,30 +26,22 @@ if (typeof window !== "undefined") {
 
 ### Parameters:
 
-&nbsp; `target` <br>
-&nbsp; &nbsp; &nbsp; HTML element that's gonna have the smooth scroll applied to. `Default: <html>`.
+- `target` <br>
+  - HTML element that's gonna have the smooth scroll applied to. `Default: <html>`.
 
-&nbsp; `options` <div style="margin-left: 20px">
-HTML element that's gonna have the smooth scroll applied to. `Default: <html>`.
+- `options`
 
-</div>
+  - `speed` <br>
+    - Determines the speed of the scroll. `Default: 100`. If used without `smooth`, the default is gonna be used `smooth: 14`.
 
-&nbsp; &nbsp; `speed` <div style="margin-left: 20px;">Determines the speed of the scroll. `Default: 100`. If used without `smooth`, default is gonna be used `smooth: 14`.
+  - `smooth` <br>
+    - Determines the smoothness of the scroll, the greater the value the slower the scroll will be.
 
- </div>
+  - `mode` <br>
+    - Specifies the mode. Mode types are `'snail' | 'normal' | 'turbo'`. It overrides the `speed` and the `smooth` values if both or one of them is presented.
 
-&nbsp; &nbsp; `smooth` <div style="margin-left: 20px;">
-Determines the smoothnes of the scroll, the greater the value the slower scroll will be.
-
-</div>
-
-&nbsp; &nbsp; `mode` <div style="margin-left: 20px;">
-Specifies the mode. Mode types are `'snail' | 'normal' | 'turbo'`. It overrides the `speed` and the `smooth` values if both or one of them is presented.
-
-</div>
-
-&nbsp; &nbsp; `smoothEdgeStop` <br>
-&nbsp; &nbsp; &nbsp; Determines whether or not to have a smooth stop at the edges of the screen ( top or bot ) or if you want it to be normal, `Default: false` which is the `normal` behavior.
+  - `smoothEdgeStop` <br>
+    - Determines whether or not to have a smooth stop at the edges of the screen ( top or bot ) or if you want it to be normal, `Default: false` which is the `normal` behavior.
 
 # Installation
 
@@ -57,16 +49,16 @@ Specifies the mode. Mode types are `'snail' | 'normal' | 'turbo'`. It overrides 
 npm install silky-smooth-scroll
 ```
 
-if you faced any issues with it in react you can add the react-ts folder in your project like this:
+if you have faced any issues with it in React you can add the react-ts folder in your project like this:
 
 ```bash
 curl "https://github.com/hossammenem/silky-smooth-scroll/tree/master/react-ts" -o "smoothScroll" # or call the out folder whatever you want
 ```
 
-_you can also use it in windows powershell since it's gonna call `Invoke-WebRequest` by itself._
+_You can also use it in Windows Powershell since it's gonna call `Invoke-WebRequest` by itself._
 
 # contributions
 
-The main focus right now is to make it compatiple with types so we don't need a whole ts version for it, also to make it compatible with react.
+The main focus right now is to make it compatible with types so we don't need a whole ts version for it, and also to make it compatible with react.
 
-Also it hasn't been tested heavily on differnt browsers, so feel free to open an issue request if you faced any issues with it in your browser.
+Also, it hasn't been tested heavily on different browsers, so feel free to open an issue request if you have faced any issues with it in your browser.
